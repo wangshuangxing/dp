@@ -1,0 +1,95 @@
+/*******
+5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5
+*/
+/*
+递归写法有优化，每个点就算一遍***
+*/
+/*
+
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+int n[101][101];
+int m[101][101];
+int nn;
+int mm(int i,int j)
+{
+    if(m[i][j]!=-1)
+    {
+        return m[i][j];
+    }
+    if(i==nn)
+     m[i][j]=n[i][j];
+     else
+     {
+         int x=mm(i+1,j);
+         int y=mm(i+1,j+1);
+         m[i][j]=max(x,y)+n[i][j];
+     }
+    return m[i][j];
+}
+int main()
+{
+
+    cin>>nn;
+    for(int i=1;i<=nn;i++)
+    {
+        for(int j=1;j<=i;j++)
+           {
+               cin>>n[i][j];
+               m[i][j]=-1;
+           }
+    }
+   cout<<mm(1,1)<<endl;
+    return 0;
+}
+*/
+
+/*
+递归改的递推，用的是循环，和滚动数组，空间优化
+*/
+
+/*
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+int d[101][101];
+int f[101];
+int main()
+{
+    int n;
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=i;j++)
+        {
+            cin>>d[i][j];
+        }
+    }
+    for(int i=1;i<=n;i++)
+    {
+        f[i]=d[n][i];
+    }
+    for(int i=n-1;i>0;i--)
+    {
+        for(int j=1;j<=i;j++)
+        {
+            f[j]=max(f[j],f[j+1])+d[i][j];
+        }
+    }
+    cout<<f[1]<<endl;
+}
+
+*/
