@@ -1,0 +1,40 @@
+/*
+01背包
+*/
+
+/*
+
+01背包的两个判断条件
+而为条件的01背包
+两个条件要在两重循环里
+p 1507
+*/
+/*
+#include <iostream>
+#include <cstring>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+int v,m,n;
+int f[500][500];
+int main()
+{
+    cin>>v>>m>>n;
+    for(int i=0;i<n;i++)
+    {
+        int vv,mm,jk;
+        cin>>vv>>mm>>jk;
+        for(int g=m;g>=mm;g--)
+        {
+            for(int j=v;j>=vv;j--)
+            f[j][g]=max(f[j][g],f[j-vv][g-mm]+jk);
+        }
+    }
+    cout<<f[v][m]<<endl;
+    return 0;
+}
+*/
+
+
