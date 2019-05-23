@@ -1,0 +1,117 @@
+/*
+
+N - Longest Ordered Subsequence POJ - 2533
+
+最长上升子序列
+
+Sample Input
+7
+1 7 3 5 9 4 8
+Sample Output
+4
+*/
+
+/*
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <cmath>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+typedef long long ll;
+int n;
+int num[1010];
+int dp[101000],dp2[101000];
+int main()
+{
+    while(scanf("%d",&n)!=EOF)
+    {
+        memset(num,0,sizeof(num));
+        for(int i=0;i<n;i++)
+        {
+            cin>>num[i];
+            dp[i]=1;
+            dp2[i]=1;
+        }
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=i-1;j>=0;j--)
+            {
+                if(num[i]>num[j])
+                {
+                    dp[i]=max(dp[i],dp[j]+1);
+                }
+                else {
+                    dp2[i]=max(dp2[i],dp2[j]+1);
+                }
+            }
+        }
+        int m=0,k=0;
+        for(int i=0;i<n;i++)
+        {
+            //cout<<dp[i]<<endl;
+            if(m<dp[i])
+            {
+                m=dp[i];
+            }
+            if(k<dp2[i])
+            {
+                k=dp2[i];
+            }
+        }
+        cout<<k<<endl<<m<<endl;
+    }
+    return 0;
+}
+*/
+
+/*
+落谷:导弹拦截
+389 207 155 300 299 170 158 65
+6
+2
+
+最长下降子序列，和最长不下降子序列
+n2的算法
+*/
+
+/*
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <string>
+
+using namespace std;
+int dp[100100],f[100100],a[100100];
+int main()
+{
+    int cun=0;
+    while(~scanf("%d",&a[++cun]));
+    for(int i=1;i<=cun;i++)
+    {
+        f[i]=1;;
+        dp[i]=1;
+    }
+    long long k=0,h=0;
+    for(int i=2;i<cun;i++)
+    {
+        for(int j=1;j<i;j++)
+        {
+            if(a[i]>a[j])
+            {
+                dp[i]=max(dp[i],dp[j]+1);
+            }
+            else
+            {
+                f[i]=max(f[i],f[j]+1);
+            }
+        }
+        if(k<dp[i])k=dp[i];
+        if(h<f[i])h=f[i];
+    }
+    cout<<h<<endl<<k<<endl;
+    return 0;
+}
+*/
