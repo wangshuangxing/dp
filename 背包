@@ -62,6 +62,8 @@ B   {
 
 /*
 非常典型的完全背包
+A类型的初始化
+
 
 母牛们不但创建了他们自己的政府而且选择了建立了自己的货币系统。
 [In their own rebellious way],，他们对货币的数值感到好奇。
@@ -81,7 +83,7 @@ B   {
 第 1 行:	 二整数， V 和 N
 第 2 ..V+1行：	可用的货币 V 个整数　(每行一个　每行没有其它的数)。
 本题是完全背包问题，将每种货币的面值看作是物品的价值
-，将要构造的目标钱数看作是背包总大小，
+， 将要构造的目标钱数看作是背包总大小，
 求的可能的构造方法数即为求使背包恰好装满可能的方案数。
 这里，状态转移方程是
 dp [ i ] [ v ] = dp [ i - 1 ] [ v ] + dp [ i - 1 ] [ v-v[ i ] ] ，dp[ i ] [ v ]
@@ -126,5 +128,95 @@ int main()
        cout<<dp[n]<<endl;
     }
     return 0;
+}
+*/
+
+
+/*
+完全背包的变形
+求最小价值
+
+3
+10 110
+2
+1 1
+30 50
+10 110
+2
+1 1
+50 30
+1 6
+2
+10 3
+20 4
+
+
+The minimum amount of money in the piggy-bank is 60.
+The minimum amount of money in the piggy-bank is 100.
+This is impossible.
+
+*/
+/*
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <climits>
+using namespace std;
+
+int a,b;
+int t;
+struct node {
+int v;
+int w;
+double x;
+}bb[505];
+int dp[100005];
+
+bool cmp(node a,node b)
+{
+    if(a.x==b.x)
+    {
+        return a.w>b.w;
+    }
+    return a.x<b.x;
+}
+int main()
+{
+    cin>>t;
+    while(t--)
+    {
+        memset(bb,0,sizeof(bb));
+        memset(dp,0,sizeof(dp));
+        cin>>a>>b;
+        a=b-a;
+        int m;
+        cin>>m;
+        for(int i=0;i<m;i++)
+        {
+            cin>>bb[i].v>>bb[i].w;
+            bb[i].x=(bb[i].v*1.0)/bb[i].w;
+        }
+        sort(bb,bb+m,cmp);
+        for(int i=0;i<=a;i++)dp[i]=1000005;
+        dp[0]=0;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=bb[i].w;j<=a;j++)
+            {
+                dp[j]=min(dp[j],dp[j-bb[i].w]+bb[i].v);
+                //cout<<dp[j]<<bb[i].w<<j<<endl;
+            }
+        }
+        if(dp[a]<1000005)
+        {
+            cout<<"The minimum amount of money in the piggy-bank is "<<dp[a]<<'.'<<endl;
+        }
+        else
+        {
+            cout<<"This is impossible."<<endl;
+        }
+    }
 }
 */
