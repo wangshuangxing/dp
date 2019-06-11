@@ -1,0 +1,91 @@
+
+
+/*
+未经优化的
+时间复杂度为n*s*v
+
+*/
+
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+int  f[1010];
+int a[1010];
+int b[1010];
+int main()
+{
+    int n , v;
+    scanf("%d%d", &n,&v);
+    for(int i=0;i<n;i++)
+    {
+        int vv,w,s;
+        scanf("%d%d%d",&vv,&w,&s);
+        for(int j=v;j>=0;j--)
+        for(int k=1;k<=s&&k*vv<=j;k++)
+        {
+            f[j]=max(f[j],f[j-k*vv]+k*w);
+        }
+    }
+    cout<<f[v]<<endl;
+    return 0;
+}
+
+
+/*
+二进制优化的
+时间复杂度为
+n*log(s)*v
+*/
+
+
+
+#include <cstdio>
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+struct Good{
+    int v;
+    int m;
+};
+
+int f[2010];
+int main()
+{
+    int n , m;
+    vector<Good> goods;
+    scanf("%d%d",& n,& m);
+    for(int i = 0;i < n;i ++ )
+    {
+        int v , w, s;
+        cin >> v >> w >> s;
+        for(int k = 1; k <= s; k *= 2)
+        {
+            s-=k;
+            goods.push_back({v*k,w*k});
+        }
+        if(s>0)
+        {
+            goods.push_back({v*s,w*s});
+        }
+    }
+    for(auto i:goods )
+    {
+        for(int j=m;j>=i.v;j--)
+        {
+            f[j] = max(f[j], f[j - i.v] + i.m);
+        }
+    }
+    cout << f[m] <<endl;
+    return 0;
+}
+
