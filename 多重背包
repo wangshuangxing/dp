@@ -78,7 +78,7 @@ int main()
             goods.push_back({v*s,w*s});
         }
     }
-    for(auto i:goods )
+    for(auto i:goods )//自动指针的运用
     {
         for(int j=m;j>=i.v;j--)
         {
